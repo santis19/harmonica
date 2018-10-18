@@ -1,0 +1,20 @@
+harmonica.ReferenceEllipsoid
+============================
+
+.. currentmodule:: harmonica
+
+.. autoclass:: ReferenceEllipsoid
+
+.. include:: backreferences/harmonica.ReferenceEllipsoid.examples
+
+.. raw:: html
+
+     <div style='clear:both'></div>
+
+
+
+
+
+.. raw:: html
+
+     <div style='clear:both'></div>

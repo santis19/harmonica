@@ -1,0 +1,596 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    
+        <title>harmonica.ellipsoid &mdash; Harmonica</title>
+    
+
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    
+    <script src="../../_static/require.js"></script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/harmonica-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/index.html">Gallery</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting help and contributing
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="https://www.fatiando.org"><i class="fa fa-external-link-square fa-fw"></i> Fatiando a Terra</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/fatiando/harmonica/blob/master/CONTRIBUTING.md"><i class="fa fa-users fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/fatiando/harmonica/blob/master/CODE_OF_CONDUCT.md"><i class="fa fa-gavel fa-fw"></i> Code of Conduct</a></li>
+            
+                <li class="toctree-l1"><a href="https://gitter.im/fatiando/fatiando"><i class="fa fa-comment fa-fw"></i> Contact</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/fatiando/harmonica"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Harmonica</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../harmonica.html">harmonica</a> &raquo;</li>
+        
+      <li>harmonica.ellipsoid</li>
+    
+    
+    <li class="source-link">
+        
+        
+    </li>
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for harmonica.ellipsoid</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module for defining and setting the reference ellipsoid for normal gravity calculations</span>
+<span class="sd">and coordinate transformations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">attr</span>
+
+
+<span class="c1"># Use a list to hold the current ellipsoid because it is mutable and therefore doesn&#39;t</span>
+<span class="c1"># need the &quot;global&quot; keyword. The current ellipsoid will always be the last element of</span>
+<span class="c1"># this list. See get_ellipsoid(). Starts off empty because we have to define</span>
+<span class="c1"># set_ellipsoid, etc, first. See the last line of this file for the set_ellipsoid call.</span>
+<span class="n">ELLIPSOID</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Dict with the known ellipsoids and their names. Used when setting the current</span>
+<span class="c1"># ellipsoid by name in set_ellipsoid().</span>
+<span class="n">KNOWN_ELLIPSOIDS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># From Hofmann-WellenhofMoritz2006</span>
+    <span class="s2">&quot;WGS84&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;WGS84&quot;</span><span class="p">,</span>
+        <span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;World Geodetic System 1984&quot;</span><span class="p">,</span>
+        <span class="n">semimajor_axis</span><span class="o">=</span><span class="mi">6378137</span><span class="p">,</span>
+        <span class="n">inverse_flattening</span><span class="o">=</span><span class="mf">298.257223563</span><span class="p">,</span>
+        <span class="n">geocentric_grav_const</span><span class="o">=</span><span class="mf">3986004.418e8</span><span class="p">,</span>
+        <span class="n">angular_velocity</span><span class="o">=</span><span class="mf">7292115e-11</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="c1"># From Hofmann-WellenhofMoritz2006</span>
+    <span class="s2">&quot;GRS80&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;GRS80&quot;</span><span class="p">,</span>
+        <span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;Geodetic Reference System 1980&quot;</span><span class="p">,</span>
+        <span class="n">semimajor_axis</span><span class="o">=</span><span class="mi">6378137</span><span class="p">,</span>
+        <span class="n">inverse_flattening</span><span class="o">=</span><span class="mf">298.257222101</span><span class="p">,</span>
+        <span class="n">geocentric_grav_const</span><span class="o">=</span><span class="mf">3986005.0e8</span><span class="p">,</span>
+        <span class="n">angular_velocity</span><span class="o">=</span><span class="mf">7292115e-11</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="c1"># Don&#39;t let ellipsoid parameters be changed to avoid messing up calculations</span>
+<span class="c1"># accidentally.</span>
+<div class="viewcode-block" id="ReferenceEllipsoid"><a class="viewcode-back" href="../../api/generated/harmonica.ReferenceEllipsoid.html#harmonica.ReferenceEllipsoid">[docs]</a><span class="nd">@attr</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ReferenceEllipsoid</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A reference ellipsoid for coordinate manipulations and normal gravity calculations.</span>
+
+<span class="sd">    The ellipsoid is oblate and spins around it&#39;s minor axis. It is defined by four</span>
+<span class="sd">    parameters and offers other derived quantities as read-only properties. In fact, all</span>
+<span class="sd">    attributes of this class are read-only and cannot be changed after instantiation.</span>
+
+<span class="sd">    All ellipsoid parameters are in SI units.</span>
+
+<span class="sd">    Use :func:`harmonica.set_ellipsoid` to set the default ellipsoid for all</span>
+<span class="sd">    calculations in harmonica and :func:`harmonica.get_ellipsoid` to retrieve the</span>
+<span class="sd">    currently set ellipsoid.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        A short name for the ellipsoid, for example ``&#39;WGS84&#39;``.</span>
+<span class="sd">    semimajor_axis : float</span>
+<span class="sd">        The semi-major axis of the ellipsoid (equatorial radius), usually represented by</span>
+<span class="sd">        &quot;a&quot; [meters].</span>
+<span class="sd">    inverse_flattening : float</span>
+<span class="sd">        The inverse of the flattening (1/f) [adimensional].</span>
+<span class="sd">    geocentric_grav_const : float</span>
+<span class="sd">        The geocentric gravitational constant (GM) [m^3 s^-2].</span>
+<span class="sd">    angular_velocity : float</span>
+<span class="sd">        The angular velocity of the rotating ellipsoid (omega) [rad s^-1].</span>
+<span class="sd">    long_name : float or None</span>
+<span class="sd">        A long name for the ellipsoid, for example ``&quot;World Geodetic System 1984&quot;``</span>
+<span class="sd">        (optional).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    We can create the WGS84 ellipsoid using the values given in</span>
+<span class="sd">    [Hofmann-WellenhofMoritz2006]_. This class offers derived attributes that can be</span>
+<span class="sd">    used for other purposes. Note that the ellipsoid gravity at the pole differs from</span>
+<span class="sd">    [Hofmann-WellenhofMoritz2006]_ on the last digit. This is sufficiently small as to</span>
+<span class="sd">    not be a cause for concern.</span>
+
+<span class="sd">    &gt;&gt;&gt; wgs84 = ReferenceEllipsoid(</span>
+<span class="sd">    ...     name=&quot;WGS84&quot;,</span>
+<span class="sd">    ...     long_name=&quot;World Geodetic System 1984&quot;,</span>
+<span class="sd">    ...     semimajor_axis=6378137,</span>
+<span class="sd">    ...     inverse_flattening=298.257223563,</span>
+<span class="sd">    ...     geocentric_grav_const=3986004.418e+8,</span>
+<span class="sd">    ...     angular_velocity=7292115e-11</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; print(wgs84) # doctest: +ELLIPSIS</span>
+<span class="sd">    ReferenceEllipsoid(name=&#39;WGS84&#39;, ... long_name=&#39;World Geodetic System 1984&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;{:.4f}&quot;.format(wgs84.semiminor_axis))</span>
+<span class="sd">    6356752.3142</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;{:.7f}&quot;.format(wgs84.flattening))</span>
+<span class="sd">    0.0033528</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;{:.13e}&quot;.format(wgs84.linear_eccentricity))</span>
+<span class="sd">    5.2185400842339e+05</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;{:.13e}&quot;.format(wgs84.second_eccentricity))</span>
+<span class="sd">    8.2094437949696e-02</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;{:.14f}&quot;.format(wgs84.emm))</span>
+<span class="sd">    0.00344978650684</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;{:.10f}&quot;.format(wgs84.gravity_equator))</span>
+<span class="sd">    9.7803253359</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;{:.10f}&quot;.format(wgs84.gravity_pole))</span>
+<span class="sd">    9.8321849379</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">semimajor_axis</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">inverse_flattening</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">geocentric_grav_const</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">angular_velocity</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="n">long_name</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">flattening</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;The flattening of the ellipsoid [adimensional]&quot;</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_flattening</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">semiminor_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;The small (polar) axis of the ellipsoid [meters]&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">semimajor_axis</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">flattening</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">linear_eccentricity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;The linear eccentricity [meters]&quot;</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">semimajor_axis</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">second_eccentricity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;The second eccentricity [adimensional]&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_eccentricity</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">emm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="s2">&quot;Auxiliary quantity :math:`m = \omega^2 a^2 b / (GM)`&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">angular_velocity</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">semimajor_axis</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span>
+            <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">geocentric_grav_const</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gravity_equator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;The norm of the gravity vector at the equator on the ellipsoid [m/s^2]&quot;</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_eccentricity</span>
+        <span class="n">arctan</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_eccentricity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span><span class="p">)</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">second_eccentricity</span>
+            <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">ratio</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span> <span class="o">*</span> <span class="n">arctan</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">ratio</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">arctan</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">axis_mul</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">semimajor_axis</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geocentric_grav_const</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">emm</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">emm</span> <span class="o">*</span> <span class="n">aux</span><span class="p">)</span> <span class="o">/</span> <span class="n">axis_mul</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gravity_pole</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;The norm of the gravity vector at the poles on the ellipsoid [m/s^2]&quot;</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_eccentricity</span>
+        <span class="n">arctan</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear_eccentricity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">semiminor_axis</span><span class="p">)</span>
+        <span class="n">aux</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">second_eccentricity</span>
+            <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">ratio</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span> <span class="o">*</span> <span class="n">arctan</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="o">/</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">ratio</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">arctan</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geocentric_grav_const</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">emm</span> <span class="o">*</span> <span class="n">aux</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">semimajor_axis</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="print_ellipsoids"><a class="viewcode-back" href="../../api/generated/harmonica.print_ellipsoids.html#harmonica.print_ellipsoids">[docs]</a><span class="k">def</span> <span class="nf">print_ellipsoids</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print all available ellipsoids.</span>
+
+<span class="sd">    These are the ones that are hard-coded into the library. You can always set your own</span>
+<span class="sd">    ellipsoid using :func:`harmonica.set_ellipsoid` and</span>
+<span class="sd">    :class:`harmonica.ReferenceEllipsoid`.</span>
+
+<span class="sd">    Any keyword arguments given to this function will be passed to :func:`print`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    &gt;&gt;&gt; print_ellipsoids() # doctest: +ELLIPSIS</span>
+<span class="sd">    ReferenceEllipsoid(name=&#39;GRS80&#39;, ... long_name=&#39;Geodetic Reference System 1980&#39;)</span>
+<span class="sd">    ReferenceEllipsoid(name=&#39;WGS84&#39;, ... long_name=&#39;World Geodetic System 1984&#39;)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">ellipsoid</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">KNOWN_ELLIPSOIDS</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ReferenceEllipsoid</span><span class="p">(</span><span class="o">**</span><span class="n">KNOWN_ELLIPSOIDS</span><span class="p">[</span><span class="n">ellipsoid</span><span class="p">]),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_ellipsoid"><a class="viewcode-back" href="../../api/generated/harmonica.set_ellipsoid.html#harmonica.set_ellipsoid">[docs]</a><span class="k">def</span> <span class="nf">set_ellipsoid</span><span class="p">(</span><span class="n">ellipsoid</span><span class="o">=</span><span class="s2">&quot;WGS84&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the reference ellipsoid used throughout the library.</span>
+
+<span class="sd">    See :func:`harmonica.print_ellipsoids` for a list of all available ellipsoids. You</span>
+<span class="sd">    always set your own ellipsoid by passing a :class:`harmonica.ReferenceEllipsoid`</span>
+<span class="sd">    to this function instead.</span>
+
+<span class="sd">    If used in a ``with`` block, will only set the ellipsoid for the context of the</span>
+<span class="sd">    block. Upon exit, will restore the previously used ellipsoid.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ellipsoid : str or :class:`~harmonica.ReferenceEllipsoid`</span>
+<span class="sd">        The reference ellipsoid to use throughout the library. Either the name of a</span>
+<span class="sd">        built-in ellipsoid (see :func:`harmonica.print_ellipsoids`) or a</span>
+<span class="sd">        :class:`~harmonica.ReferenceEllipsoid`.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    get_ellipsoid</span>
+<span class="sd">    print_ellipsoids</span>
+<span class="sd">    ReferenceEllipsoid</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    Set the ellipsoid globally (for an entire script or notebook):</span>
+
+<span class="sd">    &gt;&gt;&gt; # WGS84 is the default</span>
+<span class="sd">    &gt;&gt;&gt; print(get_ellipsoid().name)</span>
+<span class="sd">    WGS84</span>
+<span class="sd">    &gt;&gt;&gt; # Set the ellipsoid globally</span>
+<span class="sd">    &gt;&gt;&gt; set_ellipsoid(&quot;GRS80&quot;) # doctest: +ELLIPSIS</span>
+<span class="sd">    EllipsoidManager(...)</span>
+<span class="sd">    &gt;&gt;&gt; print(get_ellipsoid().name)</span>
+<span class="sd">    GRS80</span>
+<span class="sd">    &gt;&gt;&gt; # Return to the default</span>
+<span class="sd">    &gt;&gt;&gt; set_ellipsoid() # doctest: +ELLIPSIS</span>
+<span class="sd">    EllipsoidManager(...)</span>
+<span class="sd">    &gt;&gt;&gt; print(get_ellipsoid().name)</span>
+<span class="sd">    WGS84</span>
+
+<span class="sd">    To set the ellipsoid in a limited context, use a ``with`` block:</span>
+
+<span class="sd">    &gt;&gt;&gt; with set_ellipsoid(&quot;GRS80&quot;):</span>
+<span class="sd">    ...     print(get_ellipsoid().name)</span>
+<span class="sd">    GRS80</span>
+<span class="sd">    &gt;&gt;&gt; print(get_ellipsoid().name)</span>
+<span class="sd">    WGS84</span>
+<span class="sd">    &gt;&gt;&gt; # Blocks can be nested</span>
+<span class="sd">    &gt;&gt;&gt; with set_ellipsoid(&quot;GRS80&quot;):</span>
+<span class="sd">    ...     with set_ellipsoid(&quot;WGS84&quot;):</span>
+<span class="sd">    ...         print(&quot;Inner: &quot;, get_ellipsoid().name)</span>
+<span class="sd">    ...     print(&quot;Middle:&quot;, get_ellipsoid().name)</span>
+<span class="sd">    Inner:  WGS84</span>
+<span class="sd">    Middle: GRS80</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;Outer: &quot;, get_ellipsoid().name)</span>
+<span class="sd">    Outer:  WGS84</span>
+
+<span class="sd">    Use :class:`harmonica.ReferenceEllipsoid` to set a custom ellipsoid:</span>
+
+<span class="sd">    &gt;&gt;&gt; myell = ReferenceEllipsoid(name=&quot;TINY&quot;, semimajor_axis=1, inverse_flattening=1,</span>
+<span class="sd">    ...                            geocentric_grav_const=10, angular_velocity=1)</span>
+<span class="sd">    &gt;&gt;&gt; with set_ellipsoid(myell):</span>
+<span class="sd">    ...     print(get_ellipsoid().name)</span>
+<span class="sd">    TINY</span>
+<span class="sd">    &gt;&gt;&gt; print(get_ellipsoid().name)</span>
+<span class="sd">    WGS84</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ellipsoid</span> <span class="ow">in</span> <span class="n">KNOWN_ELLIPSOIDS</span><span class="p">:</span>
+        <span class="n">ellipsoid</span> <span class="o">=</span> <span class="n">ReferenceEllipsoid</span><span class="p">(</span><span class="o">**</span><span class="n">KNOWN_ELLIPSOIDS</span><span class="p">[</span><span class="n">ellipsoid</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">EllipsoidManager</span><span class="p">(</span><span class="n">ellipsoid</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="get_ellipsoid"><a class="viewcode-back" href="../../api/generated/harmonica.get_ellipsoid.html#harmonica.get_ellipsoid">[docs]</a><span class="k">def</span> <span class="nf">get_ellipsoid</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the current reference ellipsoid.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ellipsoid : :class:`~harmonica.ReferenceEllipsoid`</span>
+<span class="sd">        The currently set reference ellipsoid.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    set_ellipsoid</span>
+<span class="sd">    print_ellipsoids</span>
+<span class="sd">    ReferenceEllipsoid</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    &gt;&gt;&gt; ell = get_ellipsoid()</span>
+<span class="sd">    &gt;&gt;&gt; print(ell) # doctest: +ELLIPSIS</span>
+<span class="sd">    ReferenceEllipsoid(name=&#39;WGS84&#39;, ...)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ELLIPSOID</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<span class="nd">@attr</span><span class="o">.</span><span class="n">s</span>
+<span class="k">class</span> <span class="nc">EllipsoidManager</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A context manager to handle setting and resetting the current ellipsoid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ellipsoid</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">()</span>
+    <span class="c1"># Allow passing in the ELLIPSOID in the constructor so we can use another list to</span>
+    <span class="c1"># test this class without messing with the global ellipsoid.</span>
+    <span class="n">global_context</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">ELLIPSOID</span><span class="p">)</span>
+    <span class="n">_enabled</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">_index</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the global ellipsoid to the one given to this context.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        self</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">global_context</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ellipsoid</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_enabled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">global_context</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the global ellipsoid to what it was before this context was set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_enabled</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">global_context</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Enter context manager by calling ``set`` to enable the given ellipsoid.&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="s2">&quot;Reset the ellipsoid to the previous one.&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+
+<span class="c1"># Set the default ellipsoid for all calculations</span>
+<span class="n">set_ellipsoid</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2018, Leonardo Uieda
+      Last updated on Oct 18, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

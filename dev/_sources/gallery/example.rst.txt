@@ -31,7 +31,7 @@ A simple example to make sure the docs build.
     plt.plot(np.arange(10), np.arange(10))
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  0.020 seconds)
+**Total running time of the script:** ( 0 minutes  0.019 seconds)
 
 
 .. _sphx_glr_download_gallery_example.py:

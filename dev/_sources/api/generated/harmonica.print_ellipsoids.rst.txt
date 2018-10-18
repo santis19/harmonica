@@ -1,0 +1,12 @@
+harmonica.print\_ellipsoids
+===========================
+
+.. currentmodule:: harmonica
+
+.. autofunction:: print_ellipsoids
+
+.. include:: backreferences/harmonica.print_ellipsoids.examples
+
+.. raw:: html
+
+     <div style='clear:both'></div>

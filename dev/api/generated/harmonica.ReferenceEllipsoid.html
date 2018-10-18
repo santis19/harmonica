@@ -1,0 +1,383 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    
+        <title>harmonica.ReferenceEllipsoid &mdash; Harmonica</title>
+    
+
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="harmonica.set_ellipsoid" href="harmonica.set_ellipsoid.html" />
+    <link rel="prev" title="API Reference" href="../index.html" />
+    
+    <script src="../../_static/require.js"></script>
+
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/harmonica-logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                dev
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/index.html">Gallery</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#reference-ellipsoids">Reference Ellipsoids</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">harmonica.ReferenceEllipsoid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="harmonica.set_ellipsoid.html">harmonica.set_ellipsoid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="harmonica.get_ellipsoid.html">harmonica.get_ellipsoid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="harmonica.print_ellipsoids.html">harmonica.print_ellipsoids</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting help and contributing
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="https://www.fatiando.org"><i class="fa fa-external-link-square fa-fw"></i> Fatiando a Terra</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/fatiando/harmonica/blob/master/CONTRIBUTING.md"><i class="fa fa-users fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/fatiando/harmonica/blob/master/CODE_OF_CONDUCT.md"><i class="fa fa-gavel fa-fw"></i> Code of Conduct</a></li>
+            
+                <li class="toctree-l1"><a href="https://gitter.im/fatiando/fatiando"><i class="fa fa-comment fa-fw"></i> Contact</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/fatiando/harmonica"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Harmonica</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+      <li>harmonica.ReferenceEllipsoid</li>
+    
+    
+    <li class="source-link">
+        
+            
+                
+                
+                <a href="https://github.com/fatiando/harmonica/issues/new?title=Suggested%20improvement%20for%20api/generated/harmonica.ReferenceEllipsoid&body=Please%20describe%20what%20could%20be%20improved%20about%20this%20page%20or%20the%20typo/mistake%20that%20you%20found%3A"
+                   class="fa fa-github"> Improve this page</a>
+            
+        
+        
+    </li>
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="harmonica-referenceellipsoid">
+<h1>harmonica.ReferenceEllipsoid<a class="headerlink" href="#harmonica-referenceellipsoid" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="harmonica.ReferenceEllipsoid">
+<em class="property">class </em><code class="descclassname">harmonica.</code><code class="descname">ReferenceEllipsoid</code><span class="sig-paren">(</span><em>name</em>, <em>semimajor_axis</em>, <em>inverse_flattening</em>, <em>geocentric_grav_const</em>, <em>angular_velocity</em>, <em>long_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/harmonica/ellipsoid.html#ReferenceEllipsoid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#harmonica.ReferenceEllipsoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>A reference ellipsoid for coordinate manipulations and normal gravity calculations.</p>
+<p>The ellipsoid is oblate and spins around it’s minor axis. It is defined by four
+parameters and offers other derived quantities as read-only properties. In fact, all
+attributes of this class are read-only and cannot be changed after instantiation.</p>
+<p>All ellipsoid parameters are in SI units.</p>
+<p>Use <a class="reference internal" href="harmonica.set_ellipsoid.html#harmonica.set_ellipsoid" title="harmonica.set_ellipsoid"><code class="xref py py-func docutils literal notranslate"><span class="pre">harmonica.set_ellipsoid</span></code></a> to set the default ellipsoid for all
+calculations in harmonica and <a class="reference internal" href="harmonica.get_ellipsoid.html#harmonica.get_ellipsoid" title="harmonica.get_ellipsoid"><code class="xref py py-func docutils literal notranslate"><span class="pre">harmonica.get_ellipsoid</span></code></a> to retrieve the
+currently set ellipsoid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">A short name for the ellipsoid, for example <code class="docutils literal notranslate"><span class="pre">'WGS84'</span></code>.</p>
+</dd>
+<dt><strong>semimajor_axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The semi-major axis of the ellipsoid (equatorial radius), usually represented by
+“a” [meters].</p>
+</dd>
+<dt><strong>inverse_flattening</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The inverse of the flattening (1/f) [adimensional].</p>
+</dd>
+<dt><strong>geocentric_grav_const</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The geocentric gravitational constant (GM) [m^3 s^-2].</p>
+</dd>
+<dt><strong>angular_velocity</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The angular velocity of the rotating ellipsoid (omega) [rad s^-1].</p>
+</dd>
+<dt><strong>long_name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or None</span></dt>
+<dd><p class="first last">A long name for the ellipsoid, for example <code class="docutils literal notranslate"><span class="pre">&quot;World</span> <span class="pre">Geodetic</span> <span class="pre">System</span> <span class="pre">1984&quot;</span></code>
+(optional).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>We can create the WGS84 ellipsoid using the values given in
+<a class="reference internal" href="../../references.html#hofmann-wellenhofmoritz2006" id="id1">[Hofmann-WellenhofMoritz2006]</a>. This class offers derived attributes that can be
+used for other purposes. Note that the ellipsoid gravity at the pole differs from
+<a class="reference internal" href="../../references.html#hofmann-wellenhofmoritz2006" id="id2">[Hofmann-WellenhofMoritz2006]</a> on the last digit. This is sufficiently small as to
+not be a cause for concern.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wgs84</span> <span class="o">=</span> <span class="n">ReferenceEllipsoid</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;WGS84&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;World Geodetic System 1984&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">semimajor_axis</span><span class="o">=</span><span class="mi">6378137</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">inverse_flattening</span><span class="o">=</span><span class="mf">298.257223563</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">geocentric_grav_const</span><span class="o">=</span><span class="mf">3986004.418e+8</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">angular_velocity</span><span class="o">=</span><span class="mf">7292115e-11</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">wgs84</span><span class="p">)</span> <span class="c1"># doctest: +ELLIPSIS</span>
+<span class="go">ReferenceEllipsoid(name=&#39;WGS84&#39;, ... long_name=&#39;World Geodetic System 1984&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wgs84</span><span class="o">.</span><span class="n">semiminor_axis</span><span class="p">))</span>
+<span class="go">6356752.3142</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.7f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wgs84</span><span class="o">.</span><span class="n">flattening</span><span class="p">))</span>
+<span class="go">0.0033528</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.13e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wgs84</span><span class="o">.</span><span class="n">linear_eccentricity</span><span class="p">))</span>
+<span class="go">5.2185400842339e+05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.13e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wgs84</span><span class="o">.</span><span class="n">second_eccentricity</span><span class="p">))</span>
+<span class="go">8.2094437949696e-02</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.14f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wgs84</span><span class="o">.</span><span class="n">emm</span><span class="p">))</span>
+<span class="go">0.00344978650684</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.10f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wgs84</span><span class="o">.</span><span class="n">gravity_equator</span><span class="p">))</span>
+<span class="go">9.7803253359</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.10f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wgs84</span><span class="o">.</span><span class="n">gravity_pole</span><span class="p">))</span>
+<span class="go">9.8321849379</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">emm</span></code></dt>
+<dd><p class="first last">Auxiliary quantity <span class="math notranslate nohighlight">\(m = \omega^2 a^2 b / (GM)\)</span></p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">flattening</span></code></dt>
+<dd><p class="first last">The flattening of the ellipsoid [adimensional]</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gravity_equator</span></code></dt>
+<dd><p class="first last">The norm of the gravity vector at the equator on the ellipsoid [m/s^2]</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">gravity_pole</span></code></dt>
+<dd><p class="first last">The norm of the gravity vector at the poles on the ellipsoid [m/s^2]</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_eccentricity</span></code></dt>
+<dd><p class="first last">The linear eccentricity [meters]</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">second_eccentricity</span></code></dt>
+<dd><p class="first last">The second eccentricity [adimensional]</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">semiminor_axis</span></code></dt>
+<dd><p class="first last">The small (polar) axis of the ellipsoid [meters]</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div style='clear:both'></div><div style='clear:both'></div></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="harmonica.set_ellipsoid.html" class="btn btn-neutral float-right" title="harmonica.set_ellipsoid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2018, Leonardo Uieda
+      Last updated on Oct 18, 2018.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

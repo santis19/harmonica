@@ -1,0 +1,12 @@
+harmonica.set\_ellipsoid
+========================
+
+.. currentmodule:: harmonica
+
+.. autofunction:: set_ellipsoid
+
+.. include:: backreferences/harmonica.set_ellipsoid.examples
+
+.. raw:: html
+
+     <div style='clear:both'></div>
